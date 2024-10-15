@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông Tin Người Dùng</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .info-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .info-item {
+            margin-bottom: 15px;
+            margin-left: 247px;
+        }
+
+        .info-item label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .info-item span {
+            margin-left: 10px;
+            color: #333;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+           margin-left: 247px;
+        }
+                .back-button1 {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            
+        }
+        
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="info-container">
+        <h1>Thông Tin Người Dùng</h1>
+         <img alt="" th:src="@{'/img/'+${nguoidung.anhDaiDien}}" width="300px" height="300px" style="border-radius: 40px; display: block; margin: 0 auto; margin-bottom: 30px">
+        <div class="info-item">
+            <label>Tên Người Dùng:</label>
+            <span th:text="${nguoidung.hoTen}"></span>
+        </div>
+        <div class="info-item">
+            <label>Email:</label>
+            <span th:text="${nguoidung.email}"></span>
+        </div>
+        <div class="info-item">
+            <label>Số Điện Thoại:</label>
+            <span th:text="${nguoidung.soDienThoai}"></span>
+        </div>
+        <div class="info-item">
+            <label>Địa Chỉ:</label>
+            <span th:text="${nguoidung.diaChi}"></span>
+        </div>
+         <div class="info-item">
+            <label>Giới Tính:</label>
+            <span th:text="${nguoidung.gioiTinh}"></span>
+        </div>
+       
+        
+        
+        <a class="back-button" th:href="@{/trangchu}">
+            <i class="fas fa-arrow-left"></i> Quay lại
+        </a>
+        <a class="back-button1" th:href="@{/dangnhap}">
+            Đăng Xuất
+        </a>
+    </div>
+</body>
+</html>

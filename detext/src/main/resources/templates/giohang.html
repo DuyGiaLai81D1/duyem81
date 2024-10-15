@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ Hàng</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        h1 {
+            color: #343a40;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .table th, .table td {
+            vertical-align: middle;
+        }
+        .btn-warning {
+            background-color: #ffc107;
+            border-color: #ffc107;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+        .text-right {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .product-image {
+            width: 80px; /* Kích thước hình ảnh sản phẩm */
+            height: auto; /* Tự động điều chỉnh chiều cao */
+            border-radius: 5px; /* Bo tròn góc hình ảnh */
+        }
+        .item-total {
+            font-weight: bold;
+            color: #28a745; /* Màu sắc cho tổng tiền */
+        }
+        .remove-item {
+            color: #dc3545; /* Màu sắc cho nút xóa */
+        }
+        .remove-item:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1 class="text-center">Giỏ Hàng của Bạn</h1>
+    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Ảnh</th>
+                <th>Tên Sản Phẩm</th>
+                <th>Giá</th>
+                <th>Số Lượng</th>
+                <th>Tổng</th>
+                <th>Thao Tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="item : ${gioHang}">
+                <td ><img th:src="@{'/img/{id}'(id=${item.sanPham.hinhAnhSanPham})}" alt="Hình Sản Phẩm" class="product-image"/></td>
+                <td th:text="${item.sanPham.tenSanPham} ">Tên Sản Phẩm</td>
+                <td  th:text="${#numbers.formatDecimal(item.sanPham.giaHienTai, 1, 'COMMA', 0, 'POINT') + ' VNĐ'}">Giá</td>
+                <td>
+                    <form th:action="@{/giohang/capnhatsanpham/{id}(id=${item.id})}" method="post">
+                        <input type="hidden" th:name="id" th:value="${item.nguoiDung.id}"/>
+                        <input type="number" min="1" th:value="${item.soLuong}" th:name="soLuong" class="form-control" required />
+                        <button type="submit" class="btn btn-warning mt-2">Cập Nhật</button>
+                    </form>
+                </td>
+                
+                <td class="item-total" th:text="${#numbers.formatDecimal(item.sanPham.giaHienTai * item.soLuong, 1, 'COMMA', 0, 'POINT') + ' VNĐ'}">Tổng</td>
+                <td>
+                    <form th:action="@{/giohang/xoa/{id}(id=${item.id})}" method="post">
+                        <input type="hidden" th:name="id" th:value="${item.nguoiDung.id}"/>
+                        <button type="submit" class="btn btn-danger">Xóa</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="text-right">
+        <h4>Tổng Tiền: <span th:text="${#numbers.formatDecimal(tongtien, 1, 'COMMA', 0, 'POINT') + ' VNĐ'}"></span>
+</h4>
+    </div>
+<button type="" class="btn btn-danger" onclick="duyem()">Thoát</button>
+   
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    function duyem() {
+        window.location.href = "/trangchu"; 
+    }
+</script>
+</body>
+</html>

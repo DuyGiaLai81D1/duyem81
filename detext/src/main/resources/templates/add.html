@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm Sản Phẩm</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        h2 {
+            text-align: center;
+            color: #d65a0e;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto; /* Center the form */
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+        label {
+            margin: 10px 0 5px; /* Increase margin for spacing */
+            font-weight: bold; /* Bold labels for emphasis */
+        }
+        input[type="text"], input[type="number"], select {
+            padding: 10px;
+            margin-bottom: 15px; /* Consistent margin at the bottom */
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box; /* Ensure padding is included in width */
+        }
+        button[type="submit"] {
+            background-color: #d65a0e;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Add transition for hover effect */
+        }
+        button[type="submit"]:hover {
+            background-color: #c54e0b;
+        }
+        /* Custom file upload styles */
+        input[type="file"] {
+            display: none; /* Hide the default file input */
+        }
+        .custom-file-upload {
+            display: inline-block;
+            padding: 10px 15px;
+            cursor: pointer;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 5px 0;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+        .custom-file-upload:hover {
+            background-color: #e0e0e0; /* Change background on hover */
+        }
+    </style>
+</head>
+<body>
+    <h2>Thêm Sản Phẩm</h2>
+    
+    <div id="productForm" class="content active">
+        <h3>Form Thêm Sản Phẩm</h3>
+        <form th:action="@{/addsanpham}" method="post" th:object="${sanPham}">
+            <label for="productName">Tên Sản Phẩm:</label>
+            <input type="text" th:field="*{tenSanPham}" id="productName" required>
+
+            <label for="subTitle">Phụ Đề:</label>
+            <input type="text" th:field="*{phuDe}" id="subTitle" required>
+
+            <label for="description">Mô Tả:</label>
+            <input type="text" th:field="*{moTa}" id="description" required>
+
+            <label for="productImage">Ảnh Sản Phẩm:</label>
+            <label for="productImageInput" class="custom-file-upload">Chọn Ảnh Sản Phẩm</label>
+            <input type="file" th:field="*{hinhAnhSanPham}" id="productImageInput" required>
+
+            <label for="logoImage">Ảnh Logo:</label>
+            <label for="logoImageInput" class="custom-file-upload">Chọn Ảnh Logo</label>
+            <input type="file" th:field="*{iconSanPham}" id="logoImageInput" required>
+
+            <label for="currentPrice">Giá Mới:</label>
+            <input type="number" th:field="*{giaHienTai}" id="currentPrice" required>
+
+            <label for="oldPrice">Giá Cũ:</label>
+            <input type="number" th:field="*{giaCu}" id="oldPrice" required>
+
+            <button type="submit">Thêm vào Giỏ</button>
+        </form>
+    </div>
+</body>
+</html>

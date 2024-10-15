@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        h2 {
+            text-align: center;
+            color: #d65a0e;
+        }
+        .tab {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .tab button {
+            background-color: #d65a0e;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            margin: 0 5px;
+            border-radius: 4px;
+        }
+        .tab button:hover {
+            background-color: #c54e0b;
+        }
+        .content {
+            display: none; /* Hidden by default */
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .active {
+            display: block; /* Show when active */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f8f8f8;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        label {
+            margin: 5px 0;
+        }
+        input[type="text"], input[type="number"], select {
+            padding: 10px;
+            margin: 5px 0;
+            width: 100%;
+            max-width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .button {
+            background-color: #d65a0e;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            color: black;
+        }
+        .button:hover {
+            background-color: #c54e0b;
+        }
+    </style>
+    <script>
+        function showContent(tabName) {
+            const contents = document.querySelectorAll('.content');
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(tabName).classList.add('active');
+        }
+    </script>
+</head>
+<body>
+    <h2>Quản Lý Giỏ Hàng</h2>
+    
+    <div class="tab">
+        <button onclick="showContent('productForm')">Thêm Sản Phẩm</button>
+        <button onclick="showContent('userInfo')">Thông Tin Người Dùng</button>
+        <button onclick="showContent('cartInfo')">Giỏ Hàng</button>
+    </div>
+
+    <div id="productForm" class="content active">
+        <h3>Form Thêm Sản Phẩm</h3>
+        <form>
+           <h3>Thông Tin Sản Phẩm</h3>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Tên Sản Phẩmp</th>
+                <th>Phụ Đề</th>
+                <th>Mô tả</th>
+                <th>Hình Ảnh Sản Phẩm</th>
+                <th>Icon Sản Phẩm</th>
+                <th>Giá hiện tại</th>
+                <th>Giá Cũ</th>
+            </tr>
+            <tr th:each="sp : ${sanpham}">
+                <td th:text="${sp.id}"></td>
+                <td th:text="${sp.tenSanPham}"></td>
+                <td th:text="${sp.phuDe}"></td>
+                <td th:text="${sp.moTa}"></td>
+                <td >
+                <img alt="" th:src="@{'/img/'+${sp.hinhAnhSanPham}}" style="width: 100px">
+                </td>
+                <td >
+                <img alt="" th:src="@{'/img/'+${sp.iconSanPham}}" width="100px">
+                </td>
+                <td th:text="${sp.giaHienTai}"></td>
+                <td th:text="${sp.giaCu}"></td>
+            </tr>
+        </table>
+            <a th:href="@{/add}" class="button" >Thêm Sản Phẩm</a>
+        </form>
+    </div>
+
+    <div id="userInfo" class="content">
+        <h3>Thông Tin Người Dùng</h3>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Ảnh Đại Diện</th>
+                <th>Tên Đăng Nhập</th>
+                <th>Mật Khẩu</th>
+                <th>Email</th>
+                <th>Địa Chỉ</th>
+                <th>Họ Và Tên</th>
+                <th>Giới Tính</th>
+                <th>Số Điện Thoại</th>
+                <th>Chức Vụ</th>
+            </tr>
+            <tr th:each="nd : ${nguoidung}">
+                <td th:text="${nd.id}"></td>
+                <td >
+                <img alt="" th:src="@{'/img/'+${nd.anhDaiDien}}" width="60px" height="60px">
+                </td>
+                <td th:text="${nd.tenDangNhap}"></td>
+                <td th:text="${nd.matKhau}"></td>
+                <td th:text="${nd.email}"></td>
+                <td th:text="${nd.diaChi}"></td>
+                <td th:text="${nd.hoTen}"></td>
+                <td th:text="${nd.gioiTinh}"></td>
+                <td th:text="${nd.soDienThoai}"></td>
+                <td th:text="${nd.chuVu}"></td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="cartInfo" class="content">
+        <h3>Giỏ Hàng</h3>
+        <table>
+            <tr>
+                <th>ID Trang Giỏ Hàng</th>
+                <th>Số Lượng</th>
+                <th>ID Người Dùng</th>
+                <th>ID Sản Phẩm</th>
+            </tr>
+            <tr th:each="item : ${giohang}">
+                <td th:text="${item.id}"></td>
+                <td th:text="${item.soLuong}"></td>
+                <td th:text="${item.nguoiDung.id}"></td>
+                <td th:text="${item.sanPham.id}"></td>
+            </tr>
+        </table>
+        <h4 th:text="'Tổng Giá: ' + ${totalPrice} + ' VND'"></h4>
+    </div>
+</body>
+</html>

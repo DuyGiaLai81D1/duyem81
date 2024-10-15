@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/sanphamchitiiet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<style>
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 1518px;
+    height: auto;
+   
+
+}
+
+#gia {
+    color: red;
+}
+
+p {
+    text-align: center;
+}
+
+header {
+    height: 30px;
+    background-color: #292929;
+
+}
+
+#header1 {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 150px;
+    color: #ded0d0;
+    line-height: 30px;
+}
+
+.header2 {
+    font-family: Inter;
+}
+nav {
+    height: 175px;
+    background-color: #FFFFFF;
+}
+
+#nav1 {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 150px;
+}
+
+.nav2 {
+    line-height: 80px;
+}
+
+.nav2 p {
+    float: left;
+}
+
+.nv3 {
+    padding-left: 10px;
+}
+
+#nav3 {
+    background-color: #F8F8F8;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+}
+
+.nav3con {
+    margin-left: 150px
+}
+#main{
+    width: 1230px;
+    margin: 0 auto;
+    height: auto;
+}
+article{
+    float: left;
+    width: 68%;
+}
+#section1{
+    width: 800px;
+    height: 200px;
+    display: flex;
+    height: auto;
+}
+#section2{
+    height: 200px;
+}
+#main1{
+    width: 180px;
+}
+#main1 img {
+    width: 82%;
+    margin-bottom: 10px;
+}
+#main3{
+    width: 620px;
+}
+#main3 img {
+    width:100%;
+}
+#main2 b{
+    text-align: left;
+}
+.canle{
+    text-align: left;
+    color: red;
+    font-size: 20px;
+    margin-left: 10px;
+}
+.canlee{
+    text-align: left;
+    color: #aaa;
+    font-size: 20px;
+    margin-left: 10px;
+    text-decoration: line-through;
+}
+.canle1{
+    line-height: 26px;
+    text-decoration: underline;
+    color: #666;
+}
+.canle11{
+    line-height: 26px;
+    text-decoration: underline;
+    margin-left: 20px;
+    color: #666;
+}
+#main::after { 
+     content: ""; 
+      clear: both; 
+       display: table;
+    }
+.clearfix{
+    width: 1230px;
+    margin: 0 auto;
+    height: auto;
+}
+.article11{
+    width: 320px;
+    height: 350px;
+   padding: 0px 15px;
+}
+.article111{
+    width: 290px;
+    height: 350px;
+    
+}
+.color{
+    color: red;
+
+}
+.color1{
+    color: #7E7777;
+}
+footer{
+    margin-top: 150px;
+width: 100%;
+height: auto;
+background-color: #292929;
+
+
+}
+button.button1:hover{
+background-color: #343434;
+}
+#footer2{
+width: 100%;
+height: 150px;
+background-color: #060606;
+text-align: left;
+}
+.hovver{
+    background: #b31f2a;
+    border: 0px;
+    width: 180px;
+    height: 35px;
+    border-radius: 3px;
+    color: #EDEDED;
+}
+.hovver:hover{
+    background: #970606;
+}
+</style>
+<body>
+    <header>
+        <div id="header1">
+            <div class="header2">
+                <i class="fa-solid fa-phone"></i>
+                <em>Hotline: 0868.444.644</em>
+            </div>
+            <div class="header2">
+                <em>Cách chọn Size</em> |
+                <em>Chính sách khách vip</em> |
+                <em>Giới thiệu</em> |
+            </div>
+        </div>
+    </header>
+    <nav>
+        <div id="nav1">
+            <div class="nav2">
+               
+                    <img src="img/logo.png" alt="" onclick="duyen()">
+               
+            </div>
+            <div class="nav2">
+                <p class="nv3">HÀNG MỚI VỀ</p>
+                <p class="nv3">ÁO NAM</p>
+                <p class="nv3">QUẦN ÁO </p>
+                <p class="nv3">PHỤ KIỆN</p>
+                <p class="nv3">GIÀY DÉP</p>
+                <p class="nv3">OUTLET SALE</p>
+            </div>
+        </div>
+        <div id="nav3">
+            <span class="nav3con">4MMEN / <a href="trangsanpham.html" style="color: rgb(0, 0, 0); text-decoration: none;">Áo Polo Nam </a> / Áo Polo Trơn Form Regular PO137 Màu Đen</span>
+        </div>
+    </nav>
+    <div id="main" th:each="sanphamm:${sanpham}">
+      <article>
+        <section id="section1">
+ 
+            <div id="main3" style="margin-left: 100px" >
+                <img th:src="@{/img/{id}(id=${sanphamm.hinhAnhSanPham})}" alt="" style="margin-bottom: 30px;"><br>
+            </div>
+        </section>
+      </article>
+      <aside>
+        <section id="section2"  >
+            <div id="main2"  >
+                <b th:text="${sanphamm.tenSanPham}"></b>
+                <div style="margin-top: 10px; font-size: 15px;">
+                    <i class="fa-solid fa-star" style="color: #FFCC01;"></i> <i class="fa-solid fa-star"  style="color: #FFCC01;"></i> <i class="fa-solid fa-star"  style="color: #FFCC01;"></i> <i class="fa-solid fa-star"  style="color: #FFCC01;"></i> <i class="fa-solid fa-star"  style="color: #FFCC01;"></i> <span>(37 đánh giá / 68 lượt mua)</span>
+                </div>
+                <div style="display: flex; margin-top: 20px;">
+                    <span class="canle1">Giá Bán:</span> 
+                <p class="canle" th:text="${#numbers.formatDecimal(sanphamm.giaHienTai, 1, 'COMMA', 0, 'POINT') + ' VNĐ'}"></p>
+                <span class="canle11">Giá gốc:</span> 
+                <p class="canlee" th:text="${#numbers.formatDecimal(sanphamm.giaCu, 1, 'COMMA', 0, 'POINT') + ' VNĐ'}"> </p>
+                </div>
+                <div style="margin-top: 20px; margin-bottom: 10px;">
+                    <span>MÀU KHÁC*</span>
+                <div style="display: flex; margin-top: 10px;">
+                    <img src="img/ao-polo-bo-soc-form-regular-po136-18700.jpg" alt="" width="70px">
+                    <img src="img/ao-polo-phoi-bo-form-regular-po135-18696.jpg" alt="" width="70px" style="margin-left: 10px;">
+                </div>
+                </div>
+                <hr style="color: #C2BABA;">
+                <div style="display: flex; margin-top: 20px;">
+                    <p>
+                        SIZE* 
+                    </p>
+                    <em style="color: red;">
+                        Hướng dẫn chọn size
+                    </em>
+                   <div style="margin-left: 20px;">
+                    <p>
+                        SỐ LƯỢNG *
+                    </p>
+                   </div>
+                </div>
+                <div style="display: flex; margin-top: 20px;">
+                    <select name="" id="" style="width: 180px; height: 35px; border-radius: 3px; background-color: #EDEDED; border: 0px;">
+                        <option value="">S</option>
+                        <option value="">SS</option>
+                        <option value="">XLL</option>
+                        <option value="">XM</option>
+                    </select>
+                    <select name="" id="" style="width: 180px; height: 35px; margin-left: 20px; border-radius: 3px; background-color: #EDEDED; border: 0px;  ">
+                        <option value="">1</option>
+                        <option value="">10</option>
+                        <option value="">100</option>
+                        <option value="">1000</option>
+                    </select>
+                </div>
+                <div style="display: flex; margin-top: 20px;">
+                    <button class="hovver" ><i class="fa-solid fa-cart-shopping" style="margin: 0px 5px;"></i>Đăng ký mua</button>
+                    <a th:href="@{/giohang/{id}(id=${sanphamm.id})}"><button style="width: 180px; height: 35px; margin-left: 20px; border-radius: 3px; border: 0px; background: none; color: red; border-radius: 3px;">+ Thêm vô giỏ hàng</button></a>
+                </div>
+                <div style="margin-top: 20px;">
+                    <i class="fa-solid fa-location-dot"></i><span style="text-align: left; margin-left: 5px;"><a href="" style="color: black;">Xem Địa chỉ còn sản phẩm này</a></span>
+                </div>
+                <div style="margin-top: 20px;">
+                    <h4>ĐIỂM NỔI BẬT</h4>
+                    <p style="text-align: left;">
+                        Áo Polo Bo Sọc Form Regular PO136: <br>Thông tin sản phẩm: <br>- Mã sản phẩm: PO136 <br>- Chất liệu: Thun Tổ Ong (100% poly) <br>- Họa tiết: <br>- Form: Regular  <br> Sản phẩm hiện có tại Website <br>
+                        Facebook và hệ thống cửa hàng 4MEN toàn quốc
+                    </p>
+                </div>
+            </div>
+        </section>
+      </aside>
+    </div>
+    <div class="clearfix">
+        <hr style="margin-bottom: 20px;">
+          <b style="text-align: left; margin-top: 30px; font-size: 20px;">DANH MỤC SẢN PHẨM</b>
+       <div style="display: flex; margin-top: 20px;">
+        
+       </div>
+    </div>
+    <footer>
+        <section class="footer1" style="display: flex;">
+          <section style="margin-left: 150px; margin-top: 20px; color: #bbb;" >
+            <img src="img/logo-footer.png" alt="">
+            <p style="text-align: left; padding-top: 10px;">Giới thiệu</p>
+            <p style="text-align: left; padding-top: 10px;">Liên hệ</p>
+            <p style="text-align: left; padding-top: 10px;">Tuyển dụng</p>
+            <p style="text-align: left; padding-top: 10px;">Tin tức</p>
+            <p style="text-align: left; padding-top: 10px;"> <i class="fa-solid fa-envelope" style="padding-right: 5px;"></i>Email:info@4menshop.com</p>
+            <p style="text-align: left; padding-top: 10px;"><i class="fa-solid fa-phone"></i> Hotline: 0868.444.644</p>
+          </section>
+          <section style="width: 300px; margin-top: 20px; color: #bbb;" >
+            <h4>HỖ TRỢ KHÁCH HÀNG</h4>
+            <p style="text-align: left;">Hướng dẫn đặt hàng <br>
+                Hướng dẫn chọn size <br>
+                Câu hỏi thường gặp <br>
+                Chính sách khách VIP <br>
+                Thanh toán - Giao hàng <br>
+                Chính sách đổi hàng <br>
+                Chính sách bảo mật 
+                Chính sách cookie</p>
+          </section>
+            <div style="width: 300px; margin-top: 20px; color: #bbb;">
+                <h4>HỆ THỐNG CỬA HÀNG</h4>
+            <img src="img/footer-map.jpg" alt="" width="280px">
+            </div>
+            <div style="width: 300px; margin-top: 20px; color: #bbb;">
+                <h4>KẾT NỐI VỚI 4MEN</h4>
+            <img src="img/Screenshot 2024-09-18 164945.png" alt=""> 
+            </div>
+        </section>
+        <section style="color: #bbb;  margin-top: 20px; color: #bbb;">
+            <p style="margin-left: 150px; padding-top: 40px;">
+                Đăng ký nhận email khuyến mãi</p>
+                <input type="text" name="" id="" style="margin-left: 150px; width:230px; height: 35px; background-color: #343434; border: 0px #343434;">
+                <button class="button1" style="height: 35px; background-color: red; border: 0 red; color: white; width: 80px;">Đăng ký</button>
+        </section>
+        <div id="footer2">
+            <section>
+                <div style="margin-left: 150px; float: left; width: 65%; padding-top: 20px;">
+                    <p style="color: white; text-align: left;">Copyright 2024 · Thiết kế và phát triển bởi 4MEN SHOP All rights reserved</p>
+                    <hr width="90%">
+                    <p style="color: white; text-align: left;">Chủ quản: ông Nguyễn Ngọc Năm. <br>
+                        MST cá nhân: 0312028096 <br>
+                        Số ĐKKD: 41G8031109 do UBND Quận 7 - Tp.HCM cấp ngày 05/06/2017</p>
+                        <hr style="width: 90%;">
+                        <p style="color: red; text-align: left;">Nhãn hiệu "4MEN" đã được đăng kí độc quyền tại Cục sở hữu trí tuệ Việt Nam</p>
+                </div>
+                <div style="margin-right: 50px; padding-top: 20px;">
+                    <img src="img/gov.png" alt="">
+                </div>
+            </section>
+        </div>
+    </footer>
+
+</body>
+<script>
+    function duyem() {
+        window.location.href = "/trangchu"; 
+    }
+</script>
+</html>
